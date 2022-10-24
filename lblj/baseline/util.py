@@ -8,6 +8,7 @@ from transformers import (BatchEncoding, EvalPrediction, PreTrainedModel,
                           Trainer, TrainingArguments)
 from transformers.tokenization_utils_base import (PaddingStrategy,
                                                   PreTrainedTokenizerBase)
+import evaluate
 
 
 def preprocess_function(
@@ -122,7 +123,8 @@ def get_trainer(
         report_to='none'
     )
 
-    metric = load_metric('accuracy')
+    # metric = load_metric('accuracy')
+    metric = evaluate.load('accuracy')
 
     return Trainer(
         model=model,
